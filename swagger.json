@@ -9,7 +9,7 @@
       "url": "https://opensource.org/licenses/MIT"
     }
   },
-  "host": "localhost:3000",
+  "host": ["nodetest02.azurewebsites.net"],
   "basePath": "/",
   "tags": [
     {
@@ -17,11 +17,11 @@
       "description": "API for users in the system"
     }
   ],
-  "schemes": ["http"],
+  "schemes": ["https","http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {
-    "/articles": {
+    "/api/articles": {
       "get": {
         "tags": ["articles"],
         "summary": "Get all articles",
@@ -121,7 +121,7 @@
         }
       }
     },
-    "/articles/{id}": {
+    "/api/articles/{id}": {
       "get": {
         "tags": ["articles"],
         "summary": "Get an article by id",
@@ -148,7 +148,7 @@
         }
       }
     },
-    "/categories": {
+    "/api/categories": {
       "get": {
         "tags": ["category"],
         "summary": "Get all categories",

@@ -18,13 +18,6 @@ const categoriesRouter = require("./api/routes/categories");
 const usersRouter = require("./api/routes/users");
 const checkAuth = require("./api/middleware/checkAuth");
 
-app.use(morgan("dev"));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(express.json());
-app.use("/uploads", express.static("uploads"));
-
-
 app.use((req, res, next) => {
   //middleware
   res.header("Access-Control-Allow-Origin", "*");
@@ -38,14 +31,19 @@ app.use((req, res, next) => {
   }
   next();
 });
+app.use(morgan("dev"));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(express.json());
+app.use("/uploads", express.static("uploads"));
 
 //ROUTES
-app.use("/articles", articlesRouter);
-app.use("/categories", checkAuth, categoriesRouter);
-app.use("/users", usersRouter);
+app.use("/api/articles", articlesRouter);
+app.use("/api/categories", checkAuth, categoriesRouter);
+app.use("/api/users", usersRouter);
 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
-app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(express.urlencoded({ extended: false }));
 app.use((req, res, next) => {
